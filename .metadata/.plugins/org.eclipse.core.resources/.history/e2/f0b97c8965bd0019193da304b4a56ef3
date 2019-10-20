@@ -1,0 +1,54 @@
+package com.drmodi.jms.messageStructure;
+
+import javax.jms.Destination;
+import javax.jms.JMSConsumer;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.JMSProducer;
+import javax.jms.Message;
+import javax.jms.Queue;
+import javax.jms.TextMessage;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+
+public class RequestReplyDemo {
+	
+	public static void main(String[] args) throws NamingException, JMSException {
+		
+		//1. Lookup the request and reply queue
+		//2. producer create message and assign/mention reply queue
+		//3. send the message to requestQueue
+		//3. consumer consume the message
+		//4. create replyPoducer and get the destination from assigned reply queue
+		//5. create replyConsumer to retrieve reply message
+		
+		//1
+		InitialContext context = new InitialContext();
+		Queue reqQueue = (Queue) context.lookup("queue/requestQueue");
+		Queue resQueue = (Queue) context.lookup("queue/replyQueue");
+		
+		
+		try(ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
+				JMSContext jmsContext = cf.createContext()){
+		
+			//2.
+			JMSProducer producer = jmsContext.createProducer();
+			TextMessage txtMessage = jmsContext.createTextMessage("This is request message!!");
+			txtMessage.setJMSReplyTo(resQueue);
+			
+			//3.
+			producer.send(reqQueue, txtMessage);
+			
+			//4
+			JMSConsumer consumer = jmsContext.createConsumer(reqQueue);
+			TextMessage txtMessageReceived = (TextMessage) consumer.receive();
+			Destination replyToDestination = txtMessageReceived.getJMSReplyTo();
+			System.out.println("Request : "+txtMessageReceived.getText());
+			
+		}
+		
+	}
+
+}

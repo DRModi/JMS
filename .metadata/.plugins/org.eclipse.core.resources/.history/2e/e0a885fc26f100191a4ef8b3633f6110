@@ -1,0 +1,15 @@
+package com.drmodi.jms.p2p.clinicals;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class ClinicalsApp {
+	
+	public static void main(String[] args) throws NamingException {
+		
+		// First step, unless working with Application server which will inject InitialContext automatically.
+		new InitialContext();
+		
+	}
+
+}

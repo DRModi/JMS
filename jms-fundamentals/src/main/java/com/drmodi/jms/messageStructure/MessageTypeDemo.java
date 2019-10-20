@@ -1,0 +1,111 @@
+package com.drmodi.jms.messageStructure;
+
+import javax.jms.BytesMessage;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.JMSProducer;
+import javax.jms.MapMessage;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
+import javax.jms.StreamMessage;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+
+public class MessageTypeDemo {
+	
+	public static void main(String[] args) throws NamingException, JMSException{
+		
+		InitialContext context = new InitialContext(); 
+		Queue queue = (Queue) context.lookup("queue/myQueue");
+		
+		try(ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
+				JMSContext jmsContext = cf.createContext();){
+			
+			JMSProducer producer = jmsContext.createProducer();
+			
+			
+			//--------------  Byte Message Type ---------------------------
+			
+			//Create Byte Message
+			BytesMessage byteMessage = jmsContext.createBytesMessage();
+			byteMessage.writeUTF("This is UTF ByteMessage");
+			byteMessage.writeDouble(255992d);
+			
+			//Uncomment, if byte message is being sent
+			//producer.send(queue, byteMessage);
+			
+			//Consume Byte Message 
+			//BytesMessage receivedMessage = (BytesMessage) jmsContext.createConsumer(queue).receive();
+			//System.out.println("Received UTF Message : "+receivedMessage.readUTF());
+			//System.out.println("Received Double Message : "+receivedMessage.readDouble());
+			
+			//--------------  Stream Message Type ---------------------------
+			
+			
+			//Create Stream Message
+			StreamMessage streamMessage = jmsContext.createStreamMessage();
+			streamMessage.writeBoolean(true);
+			streamMessage.writeString("This String Message for Stream Message");
+			
+			//Uncomment, if stream message is being sent
+			//producer.send(queue, streamMessage);
+			
+			//Consume Stream Message 
+			//StreamMessage receivedMessage = (StreamMessage) jmsContext.createConsumer(queue).receive();
+			//System.out.println("Received boolean Message : "+receivedMessage.readBoolean());
+			//System.out.println("Received String Stream Message : "+receivedMessage.readString());
+			
+			
+			//--------------  Map Message Type ---------------------------
+			MapMessage mapMessage = jmsContext.createMapMessage();
+			mapMessage.setBoolean("isValid", true);
+			mapMessage.setString("strInput", "This is Map Message String Property");
+			
+			//Uncomment, if map message is being sent
+			//producer.send(queue, mapMessage);
+			
+			//Consume MapMessage
+			//MapMessage receivedMessage = (MapMessage) jmsContext.createConsumer(queue).receive();
+			//System.out.println("Received Boolen Property of Message :"+receivedMessage.getBoolean("isValid"));
+			//System.out.println("Received String Message : "+receivedMessage.getString("strInput"));
+			
+			
+			//--------------  Object Message Type ---------------------------
+			
+			ObjectMessage objMessage = jmsContext.createObjectMessage();
+			objMessage.setObject(new Patient(0, "NoPatient")); //Patient object need be serialized
+			
+			//Uncomment, if object message being sent
+			//producer.send(queue, objMessage);
+			
+			//Consume message
+			//ObjectMessage receivedMessage = (ObjectMessage) jmsContext.createConsumer(queue).receive();			
+			//Patient objPatient = (Patient) receivedMessage.getObject();
+			//System.out.println(receivedMessage.getObject().toString());
+			//System.out.println("Get the Patient Name: "+ objPatient.getName());
+			//System.out.println("Get the Patient ID: "+ objPatient.getId());
+			
+			
+			//--------------  Using Send which overload all the different message Type ---------------------------
+			
+			//Important Note: if headers, custom properties need to be added on this objectMessage than 
+			//ObjectMessage will be used.
+			
+			Patient directPatientObject = new Patient(0, "NoPatient");
+			
+			//Now directly send patient as an message instead of using ObjectMessage Type, JMS 2.0 makes it simple
+			producer.send(queue, directPatientObject);
+			
+			//Consume direct as patient object
+			Patient receivedPatient = jmsContext.createConsumer(queue).receiveBody(Patient.class);
+			System.out.println(receivedPatient.toString());
+			System.out.println("Get the Patient Name: "+ receivedPatient.getName());
+			System.out.println("Get the Patient ID: "+ receivedPatient.getId());
+			
+		}
+		
+	}
+
+}

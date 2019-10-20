@@ -1,0 +1,5 @@
+package com.drmodi.jms.p2p.model;
+
+public class Patient {
+
+}

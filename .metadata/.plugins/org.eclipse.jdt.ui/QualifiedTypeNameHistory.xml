@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.jms.Topic"/>
+<fullyQualifiedTypeName name="javax.jms.ConnectionFactory"/>
+<fullyQualifiedTypeName name="javax.sound.midi.Soundbank"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+<fullyQualifiedTypeName name="javax.jms.Queue"/>
+<fullyQualifiedTypeName name="org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory"/>
+<fullyQualifiedTypeName name="javax.jms.TextMessage"/>
+<fullyQualifiedTypeName name="javax.jms.Message"/>
+<fullyQualifiedTypeName name="javax.jms.JMSConsumer"/>
+<fullyQualifiedTypeName name="javax.jms.JMSContext"/>
+</qualifiedTypeNameHistroy>

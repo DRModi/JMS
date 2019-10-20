@@ -1,0 +1,5 @@
+package com.drmodi.jms.messageStructure;
+
+public class MessageDelaryDemo {
+
+}

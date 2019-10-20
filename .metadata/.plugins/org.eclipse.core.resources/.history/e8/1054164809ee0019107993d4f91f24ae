@@ -1,0 +1,44 @@
+package com.drmodi.jms.messageStructure;
+
+import javax.jms.JMSConsumer;
+import javax.jms.JMSContext;
+import javax.jms.JMSProducer;
+import javax.jms.Message;
+import javax.jms.Queue;
+import javax.jms.TextMessage;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+
+public class MessageExpirationDemo {
+	
+	public static void main(String[] args) throws Exception {
+		
+		InitialContext context = new InitialContext();
+		Queue queue = (Queue) context.lookup("queue/myQueue");
+		Queue expiryQueue = (Queue) context.lookup("queue/expiryQueue");
+		
+		
+		try(ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
+				JMSContext jmsContext = cf.createContext();){
+			
+			JMSProducer producer = jmsContext.createProducer();
+			
+			//producer.setTimeToLive(2000); //if you comment it out than message wont expire
+			
+			TextMessage txtMessage = jmsContext.createTextMessage("Message 5");
+			producer.send(queue, txtMessage);
+			Thread.sleep(3500);
+			
+			JMSConsumer consumer = jmsContext.createConsumer(queue);
+			Message message = consumer.receive(3500);
+			System.out.println(message);
+			
+			//create consumer for expiry message - default expiry queue being used (broker.xml)
+			JMSConsumer expQueueConsumer = jmsContext.createConsumer(expiryQueue);
+			System.out.println("Consumed Message From Expiry Queue : "+expQueueConsumer.receiveBody(String.class));
+		}
+	}
+
+}
