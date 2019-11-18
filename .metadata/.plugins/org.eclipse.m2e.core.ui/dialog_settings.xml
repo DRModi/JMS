@@ -25,12 +25,22 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.drmodi.jms.security.jms_p2p_security"/>
+			<item value="com.drmodi.jms.guaranteed.messaging.jms_transactions"/>
+			<item value="com.drmodi.jms.guaranteed.messaging.jms_guaranteed_messaging"/>
+			<item value="com.drmodi.jms.jms_message_filters"/>
 			<item value="com.drmodi.jms.JMSFundamentals"/>
 		</list>
 		<list key="groupId">
+			<item value="com.drmodi.jms.security"/>
+			<item value="com.drmodi.jms.guaranteed.messaging"/>
 			<item value="com.drmodi.jms"/>
 		</list>
 		<list key="artifactId">
+			<item value="jms-p2p-security"/>
+			<item value="jms-transactions"/>
+			<item value="jms-guaranteed-messaging"/>
+			<item value="jms-message-filters"/>
 			<item value="jms-fundamentals"/>
 		</list>
 		<list key="projectNameTemplate">

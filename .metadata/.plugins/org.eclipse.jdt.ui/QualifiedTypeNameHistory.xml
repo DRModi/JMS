@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="javax.jms.Topic"/>
 <fullyQualifiedTypeName name="javax.jms.ConnectionFactory"/>
 <fullyQualifiedTypeName name="javax.sound.midi.Soundbank"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="javax.jms.Message"/>
+<fullyQualifiedTypeName name="javax.jms.Topic"/>
+<fullyQualifiedTypeName name="com.drmodi.jms.model.Employee"/>
+<fullyQualifiedTypeName name="javax.jms.JMSConsumer"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="javax.jms.ObjectMessage"/>
+<fullyQualifiedTypeName name="com.drmodi.jms.claims.model.Claim"/>
+<fullyQualifiedTypeName name="org.apache.activemq.artemis.api.core.Message"/>
+<fullyQualifiedTypeName name="io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Consumer"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
 <fullyQualifiedTypeName name="javax.jms.Queue"/>
 <fullyQualifiedTypeName name="org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory"/>
-<fullyQualifiedTypeName name="javax.jms.TextMessage"/>
-<fullyQualifiedTypeName name="javax.jms.Message"/>
-<fullyQualifiedTypeName name="javax.jms.JMSConsumer"/>
 <fullyQualifiedTypeName name="javax.jms.JMSContext"/>
+<fullyQualifiedTypeName name="javax.jms.TextMessage"/>
+<fullyQualifiedTypeName name="javax.jms.MessageListener"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ConcurrentHashMap"/>
+<fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
 </qualifiedTypeNameHistroy>

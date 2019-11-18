@@ -1,0 +1,19 @@
+(1) Create Spring Starter project
+(2) Update the application class with @EnableJms annotation
+(3) Update the application properties 
+	> Define the queue name - myQueue
+		- if queue doesn't exist Artemis will create on the fly
+(4) Create Sender class
+	> Refer the queue name using @Value annotation
+	> Create the jmsTemplate and use it to send message 
+	
+(5) Receive the message, using listener/mdp, also can be done using receive method using jmsTemplate,
+    but it would the block method and simply block on that queue.
+		> Create class called myListener, create method and mark with @JmsListener
+		> provide the destination value (queue value)
+
+(6) From test class
+		> create sender class object and send message
+
+	
+	
